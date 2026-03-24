@@ -2,6 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <stack>
 struct node {
 	int v;
 	node* l;
@@ -139,6 +140,25 @@ public:
 			std::cout << '\n';
 		}
 	}
+	void dfs() {
+		if (!root) {
+			return;
+		}
+		std::stack<node*> st;
+		st.push(root);
+		while (!st.empty()) {
+			node* t = st.top();
+			st.pop();
+			std::cout << t->v << ' ';
+			if (t->r) {
+				st.push(t->r);
+			}
+			if (t->l) {
+				st.push(t->l);
+			}
+		}
+		std::cout << '\n';
+	}
 	void remove(int x) {
 		if (!root) {
 			return;
@@ -154,5 +174,8 @@ public:
 	}
 	int size() {
 		return sot;
+	}
+	~tree() {
+		clear();
 	}
 };
